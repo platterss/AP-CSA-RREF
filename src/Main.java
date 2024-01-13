@@ -2,8 +2,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        int[][] array = getInput();
-        Matrix matrix = new Matrix(array);
+        Matrix matrix = new Matrix(getInput());
         System.out.println();
 
         System.out.println("Inputted matrix:");
