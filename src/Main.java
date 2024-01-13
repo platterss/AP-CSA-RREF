@@ -4,8 +4,12 @@ public class Main {
     public static void main(String[] args) {
         int[][] array = getInput();
         Matrix matrix = new Matrix(array);
+        System.out.println();
 
+        System.out.println("Inputted matrix:");
         matrix.printMatrix();
+
+        System.out.println("\nRREF:");
         matrix.printRREF();
     }
 
