@@ -1,7 +1,6 @@
 package test;
 
 import main.Matrix;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.io.ByteArrayOutputStream;
@@ -12,16 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class MatrixTest {
 
     private final ByteArrayOutputStream outputContent = new ByteArrayOutputStream();
-    private final PrintStream originalOutput = System.out;
 
     @BeforeEach
     public void setUpStreams() {
         System.setOut(new PrintStream(outputContent));
-    }
-
-    @AfterEach
-    public void restoreStreams() {
-        System.setOut(originalOutput);
     }
 
     @org.junit.jupiter.api.Test
