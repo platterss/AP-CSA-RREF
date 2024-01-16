@@ -2,9 +2,9 @@ import java.math.*;
 import java.util.*;
 
 public class Matrix {
-    private int[][] matrix;
+    private double[][] matrix;
 
-    public Matrix(int[][] matrix) {
+    public Matrix(double[][] matrix) {
         this.matrix = matrix;
     }
 
@@ -16,31 +16,38 @@ public class Matrix {
         return matrix[0].length;
     }
 
-    public void printMatrix() {
-        for (int[] row : matrix) {
+    public void print() {
+        for (double[] row : matrix) {
             System.out.println(Arrays.toString(row));
         }
+        System.out.println();
+    }
+
+    public void printMatrix(double[][] matrix) {
+        for (double[] row : matrix) {
+            System.out.println(Arrays.toString(row));
+        }
+        System.out.println();
     }
 
     public void printRREF() {
-        double[][] newMatrix = new double[this.getRows()][this.getColumns()];
+        double[][] newMatrix = matrix;
 
-        // Convert array to doubles to be able to divide
-        for (int i = 0; i < this.getRows(); i++) {
-            for (int j = 0; j < this.getColumns(); j++) {
-                newMatrix[i][j] = matrix[i][j];
-            }
-        }
+        boolean noSolution = false;
+        boolean infiniteSolutions = false;
 
         // Gaussian elimination
         for (int r = 0; r < this.getRows(); r++) {
-            // Make the diagonal contain all 1's
+            // Make the diagonal 1
             if (newMatrix[r][r] != 0) {
                 double divFactor = newMatrix[r][r];
                 for (int c = 0; c < this.getColumns(); c++) {
                     newMatrix[r][c] /= divFactor;
                 }
             }
+
+            System.out.println("Making the diagonal 1:");
+            printMatrix(newMatrix);
 
             // Make all rows below this one 0 in the current column
             for (int i = r + 1; i < this.getRows(); i++) {
@@ -49,9 +56,12 @@ public class Matrix {
                     newMatrix[i][c] -= factor * newMatrix[r][c];
                 }
             }
+
+            System.out.println("Making the rest 0:");
+            printMatrix(newMatrix);
         }
 
-        // Back substitution to get reduced echelon form
+        // Back substitution to get RREF
         for (int r = this.getRows() - 1; r >= 0; r--) {
             for (int i = r - 1; i >= 0; i--) {
                 double factor = newMatrix[i][r];
@@ -61,14 +71,63 @@ public class Matrix {
             }
         }
 
-        // Rounding
+        System.out.println("Back substitution:");
+        printMatrix(newMatrix);
+
+        // Rounding the results
         for (int r = 0; r < this.getRows(); r++) {
             newMatrix[r][this.getColumns() - 1] = round(newMatrix[r][this.getColumns() - 1]);
         }
 
-        // Printing
-        for (double[] row : newMatrix) {
-            System.out.println(Arrays.toString(row));
+        System.out.println("Rounding:");
+        printMatrix(newMatrix);
+
+        // Checks for no solutions
+        for (int r = 0; r < this.getRows(); r++) {
+            // Checks if a row's coefficients are all zeros
+            boolean rowAllZeros = true;
+            for (int c = 0; c < this.getColumns() - 1; c++) {
+                if (newMatrix[r][c] != 0) {
+                    rowAllZeros = false;
+                    break;
+                }
+            }
+
+            // Checks if the last element of a row is not 0
+            // 0x + 0y + 0z = k implies 0 = k, which is false where k != 0
+            if (rowAllZeros && newMatrix[r][this.getColumns() - 1] != 0) {
+                noSolution = true;
+                break;
+            }
+        }
+
+        // Count the non-zero rows to determine whether it's infinite solutions
+        int nonZeroRows = 0;
+        for (int r = 0; r < this.getRows(); r++) {
+            for (int c = 0; c < this.getColumns(); c++) {
+                if (newMatrix[r][c] != 0) {
+                    nonZeroRows++;
+                    break;
+                }
+            }
+        }
+
+        // Checks if the number of non-zero rows is less than the amount of variables
+        if (nonZeroRows < this.getColumns() - 1) {
+            infiniteSolutions = true;
+        }
+
+        // Print
+
+        System.out.println("Result:");
+        if (noSolution) {
+            System.out.println("The system has no solution.");
+        } else if (infiniteSolutions) {
+            System.out.println("The system has infinitely many solutions.");
+        } else {
+            for (double[] row : newMatrix) {
+                System.out.println(Arrays.toString(row));
+            }
         }
     }
 

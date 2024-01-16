@@ -6,13 +6,13 @@ public class Main {
         System.out.println();
 
         System.out.println("Inputted matrix:");
-        matrix.printMatrix();
+        matrix.print();
 
-        System.out.println("\nRREF:");
+        System.out.println("RREF:");
         matrix.printRREF();
     }
 
-    public static int[][] getInput() {
+    public static double[][] getInput() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Number of rows: ");
@@ -20,12 +20,12 @@ public class Main {
         System.out.println("Number of columns: ");
         int columns = scanner.nextInt();
 
-        int[][] matrix = new int[rows][columns];
+        double[][] matrix = new double[rows][columns];
 
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 System.out.println("Value in (" + i + ", " + j + "):");
-                matrix[i][j] = scanner.nextInt();
+                matrix[i][j] = scanner.nextDouble();
             }
         }
 
