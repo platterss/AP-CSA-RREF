@@ -1,3 +1,5 @@
+package main;
+
 import java.util.Scanner;
 
 public class Main {
@@ -13,10 +15,10 @@ public class Main {
             System.out.println("RREF:");
             matrix.printRREF();
 
-            System.out.println("\nWould you like to enter a new matrix? Y/N");
-            String newMatrix = scanner.nextLine().toLowerCase();
+            System.out.println("\nWould you like to enter a new matrix? N to exit");
+            String restart = scanner.nextLine().toLowerCase();
 
-            if (newMatrix.equals("n")) {
+            if (restart.equals("n")) {
                 break;
             }
         }

@@ -1,3 +1,5 @@
+package main;
+
 import java.math.*;
 import java.util.*;
 
@@ -14,6 +16,10 @@ public class Matrix {
 
     public int getColumns() {
         return matrix[0].length;
+    }
+
+    public double[][] getMatrix() {
+        return matrix;
     }
 
     public void print() {
@@ -48,6 +54,7 @@ public class Matrix {
                 }
             }
 
+            sanitizeMatrix();
             System.out.println("Making the rest 0:");
             print();
         }
@@ -93,6 +100,7 @@ public class Matrix {
         }
 
         // Count the non-zero rows to determine whether it's infinite solutions
+        // 0x + 0y + 0z = 0 -> 0 = 0, therefore anything works
         int nonZeroRows = 0;
         for (int r = 0; r < this.getRows(); r++) {
             for (int c = 0; c < this.getColumns(); c++) {
@@ -115,8 +123,17 @@ public class Matrix {
         } else if (infiniteSolutions) {
             System.out.println("The system has infinitely many solutions.");
         } else {
-            for (double[] row : matrix) {
-                System.out.println(Arrays.toString(row));
+            print();
+        }
+    }
+
+    // Replaces -0.0 with 0.0 because it can be negative for some reason
+    private void sanitizeMatrix() {
+        for (int r = 0; r < getRows(); r++) {
+            for (int c = 0; c < getColumns(); c++) {
+                if (matrix[r][c] == 0.0) {
+                    matrix[r][c] = 0.0;
+                }
             }
         }
     }
