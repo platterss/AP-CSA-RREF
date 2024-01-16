@@ -15,7 +15,7 @@ public class Main {
             System.out.println("RREF:");
             matrix.printRREF();
 
-            System.out.println("\nWould you like to enter a new matrix? N to exit");
+            System.out.println("Would you like to enter a new matrix? N to exit");
             String restart = scanner.nextLine().toLowerCase();
 
             if (restart.equals("n")) {

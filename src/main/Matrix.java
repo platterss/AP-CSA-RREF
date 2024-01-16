@@ -43,7 +43,7 @@ public class Matrix {
                 }
             }
 
-            System.out.println("Making the diagonal 1:");
+            System.out.println("Making the diagonal 1: (Row " + (r + 1) + ")");
             print();
 
             // Make all rows below this one 0 in the current column
@@ -55,7 +55,7 @@ public class Matrix {
             }
 
             sanitizeMatrix();
-            System.out.println("Making the rest 0:");
+            System.out.println("Making everything else in the column 0: (Row " + (r + 1) + ")");
             print();
         }
 
