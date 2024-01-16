@@ -9,7 +9,6 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MatrixTest {
-
     private final ByteArrayOutputStream outputContent = new ByteArrayOutputStream();
 
     @BeforeEach
