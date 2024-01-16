@@ -2,14 +2,24 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Matrix matrix = new Matrix(getInput());
-        System.out.println();
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            Matrix matrix = new Matrix(getInput());
+            System.out.println();
 
-        System.out.println("Inputted matrix:");
-        matrix.print();
+            System.out.println("Inputted matrix:");
+            matrix.print();
 
-        System.out.println("RREF:");
-        matrix.printRREF();
+            System.out.println("RREF:");
+            matrix.printRREF();
+
+            System.out.println("\nWould you like to enter a new matrix? Y/N");
+            String newMatrix = scanner.nextLine().toLowerCase();
+
+            if (newMatrix.equals("n")) {
+                break;
+            }
+        }
     }
 
     public static double[][] getInput() {
