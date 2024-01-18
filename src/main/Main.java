@@ -30,7 +30,7 @@ public class Main {
 
         System.out.println("Number of rows: ");
         int rows = scanner.nextInt();
-        System.out.println("Number of columns: ");
+        System.out.println("Number of columns (add 1 for the answer column): ");
         int columns = scanner.nextInt();
 
         double[][] matrix = new double[rows][columns];
