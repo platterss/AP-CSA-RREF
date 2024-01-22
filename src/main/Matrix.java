@@ -43,9 +43,6 @@ public class Matrix {
                 }
             }
 
-            System.out.println("Making the diagonal 1: (Row " + (r + 1) + ")");
-            print();
-
             // Make all rows below this one 0 in the current column
             for (int i = r + 1; i < this.getRows(); i++) {
                 double factor = matrix[i][r];
@@ -55,9 +52,10 @@ public class Matrix {
             }
 
             sanitizeMatrix();
-            System.out.println("Making everything else in the column 0: (Row " + (r + 1) + ")");
-            print();
         }
+
+        System.out.println("Step 1: Gaussian elimination:");
+        print();
 
         // Back substitution to get RREF
         for (int r = this.getRows() - 1; r >= 0; r--) {
@@ -69,7 +67,7 @@ public class Matrix {
             }
         }
 
-        System.out.println("Back substitution:");
+        System.out.println("Step 2: Back substitution:");
         print();
 
         // Rounding the results
@@ -77,7 +75,7 @@ public class Matrix {
             matrix[r][this.getColumns() - 1] = round(matrix[r][this.getColumns() - 1]);
         }
 
-        System.out.println("Rounding:");
+        System.out.println("Step 3: Rounding:");
         print();
 
         // Checks for no solutions
