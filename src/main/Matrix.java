@@ -33,7 +33,8 @@ public class Matrix {
         boolean noSolution = false;
         boolean infiniteSolutions = false;
 
-        // Gaussian elimination
+        System.out.println("1. Gauss-Jordan Elimination process");
+        // Gauss-Jordan elimination
         for (int r = 0; r < this.getRows(); r++) {
             // Make the diagonal 1
             if (matrix[r][r] != 0) {
@@ -43,39 +44,26 @@ public class Matrix {
                 }
             }
 
-            // Make all rows below this one 0 in the current column
-            for (int i = r + 1; i < this.getRows(); i++) {
-                double factor = matrix[i][r];
-                for (int c = 0; c < this.getColumns(); c++) {
-                    matrix[i][c] -= factor * matrix[r][c];
+            // Eliminate all other entries in the current column
+            for (int i = 0; i < this.getRows(); i++) {
+                if (i != r) {
+                    double factor = matrix[i][r];
+                    for (int c = 0; c < this.getColumns(); c++) {
+                        matrix[i][c] -= factor * matrix[r][c];
+                    }
                 }
             }
 
+            print();
             sanitizeMatrix();
         }
-
-        System.out.println("Step 1: Gaussian elimination:");
-        print();
-
-        // Back substitution to get RREF
-        for (int r = this.getRows() - 1; r >= 0; r--) {
-            for (int i = r - 1; i >= 0; i--) {
-                double factor = matrix[i][r];
-                for (int c = 0; c < this.getColumns(); c++) {
-                    matrix[i][c] -= factor * matrix[r][c];
-                }
-            }
-        }
-
-        System.out.println("Step 2: Back substitution:");
-        print();
 
         // Rounding the results
         for (int r = 0; r < this.getRows(); r++) {
             matrix[r][this.getColumns() - 1] = round(matrix[r][this.getColumns() - 1]);
         }
 
-        System.out.println("Step 3: Rounding:");
+        System.out.println("2. Rounding");
         print();
 
         // Checks for no solutions
