@@ -33,7 +33,7 @@ public class Matrix {
         boolean noSolution = false;
         boolean infiniteSolutions = false;
 
-        System.out.println("1. Gauss-Jordan Elimination process");
+        System.out.println("Gauss-Jordan Elimination process:\n");
         // Gauss-Jordan elimination
         for (int r = 0; r < this.getRows(); r++) {
             // Make the diagonal 1
@@ -62,9 +62,6 @@ public class Matrix {
         for (int r = 0; r < this.getRows(); r++) {
             matrix[r][this.getColumns() - 1] = round(matrix[r][this.getColumns() - 1]);
         }
-
-        System.out.println("2. Rounding");
-        print();
 
         // Checks for no solutions
         for (int r = 0; r < this.getRows(); r++) {
@@ -103,12 +100,13 @@ public class Matrix {
         }
 
         // Print
-        System.out.println("Result:");
+        System.out.print("Result");
         if (noSolution) {
-            System.out.println("The system has no solution.");
+            System.out.println(": The system has no solution.");
         } else if (infiniteSolutions) {
-            System.out.println("The system has infinitely many solutions.");
+            System.out.println(": The system has infinitely many solutions.");
         } else {
+            System.out.println(" (after rounding):");
             print();
         }
     }
